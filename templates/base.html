@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>
+{% block title %}{{ company.name }} | HVAC Service in Central PA{% endblock %}
+</title>
+<meta name="description" content="{% block description %}{{ company.description }}{% endblock %}">
+{% if site_url %}
+<link rel="canonical" href="{{ site_url }}{{ request.path }}">
+{% endif %}
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% if site_url %}
+<script type="application/ld+json">{{ {"@context":"https://schema.org","@type":"HVACBusiness","name":company.name,"url":site_url,"telephone":company.phone,"areaServed":"Central Pennsylvania"}|tojson }}</script>
+{% endif %}
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="cursor-glow">
+</div>
+<header class="nav" id="nav">
+<a class="brand" href="{{ url_for('home') }}">
+<img src="{{ url_for('static', filename='img/akai-logo.jpg') }}" alt="Akai logo">
+<span>{{ company.name }}</span>
+</a>
+<button class="menu" id="menu" type="button" aria-controls="navLinks" aria-expanded="false">Menu</button>
+<nav id="navLinks">
+<a href="{{ url_for('home') }}">Home</a>
+<a href="{{ url_for('services_page') }}">Services</a>
+<a href="{{ url_for('service_area') }}">Service Area</a>
+<a href="{{ url_for('request_service') }}">Request Service</a>
+<a class="pill" href="{{ company.phone_href }}">Call {{ company.phone }}</a>
+</nav>
+</header>
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}
+<div class="flash-wrap">
+{% for category, message in messages %}
+<div class="flash {{ category }}">{{ message }}</div>
+{% endfor %}
+</div>
+{% endif %}{% endwith %}
+<main id="main">
+{% block content %}{% endblock %}
+</main>
+<footer class="footer reveal">
+<div>
+<img src="{{ url_for('static', filename='img/akai-logo.jpg') }}" alt="Akai logo">
+<p>Premium HVAC, refrigeration, and comfort service for homes and local businesses.</p>
+</div>
+<div>
+<h4>Contact</h4>
+<a href="{{ company.phone_href }}">{{ company.phone }}</a>
+<a href="mailto:{{ company.email }}">{{ company.email }}</a>
+<span>{{ company.location }}</span>
+</div>
+<div>
+<h4>SEO Pages</h4>
+{% for p in city_pages[:4] %}
+<a href="{{ url_for('seo_page', slug=p.slug) }}">{{ p.service }} {{ p.city }}</a>
+{% endfor %}
+</div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
+</script>
+<script src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+</body>
+</html>
