@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block title %}HVAC Services | {{ company.name }}{% endblock %}{% block content %}
+<section class="page-hero">
+<p class="eyebrow">Services</p>
+<h1>Heating, cooling, refrigeration, and maintenance.</h1>
+</section>
+<section class="section service-list">
+{% for s in services %}
+<article class="split reveal">
+<img src="{{ s.image }}" alt="{{ s.title }}">
+<div>
+<p class="eyebrow">{{ s.eyebrow }}</p>
+<h2>{{ s.title }}</h2>
+<p>{{ s.details }}</p>
+<a class="btn primary" href="{{ url_for('request_service') }}">Request {{ s.title }}</a>
+</div>
+</article>
+{% endfor %}
+</section>
+{% endblock %}

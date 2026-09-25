@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block title %}{{ page.service }} in {{ page.city }}, PA | {{ company.name }}{% endblock %}{% block content %}
+<section class="page-hero">
+<p class="eyebrow">{{ page.city }}, PA</p>
+<h1>{{ page.service }} in {{ page.city }}, PA</h1>
+<p>{{ company.name }} helps homeowners and local businesses in {{ page.city }} with responsive, professional HVAC service.</p>
+<a class="btn primary" href="{{ url_for('request_service') }}">Request Service</a>
+</section>
+<section class="section">
+<h2 class="reveal">Service in {{ page.city }}</h2>
+<p class="reveal">Explore the service options and use the contact page to ask about coverage and availability in {{ page.city }}.</p>
+</section>
+{% endblock %}

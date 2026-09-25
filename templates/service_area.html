@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block content %}
+<section class="page-hero">
+<p class="eyebrow">Service Area</p>
+<h1>Local HVAC service across Central Pennsylvania.</h1>
+</section>
+<section class="section city-grid">
+{% for p in city_pages %}
+<a class="glass city reveal" href="{{ url_for('seo_page', slug=p.slug) }}">
+<span>{{ p.city }}</span>
+<b>{{ p.service }}</b>
+<small>View local page →</small>
+</a>
+{% endfor %}
+</section>
+<section class="map-section reveal">
+<iframe title="Service area map" loading="lazy" src="https://www.google.com/maps?q=Harrisburg%20PA&output=embed">
+</iframe>
+</section>
+{% endblock %}

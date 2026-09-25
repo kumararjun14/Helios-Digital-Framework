@@ -1,0 +1,84 @@
+{% extends "base.html" %}{% block content %}
+<section class="hero">
+<div class="noise">
+</div>
+<div class="hero-copy">
+<p class="eyebrow">Heating · Air Conditioning · Refrigeration</p>
+<h1>Comfort that feels handled before the problem gets bigger.</h1>
+<p>Modern HVAC service for Harrisburg and Central Pennsylvania. Clear service information and a direct way to get in touch.</p>
+<div class="actions">
+<a class="btn primary" href="{{ url_for('request_service') }}">Request Service</a>
+<a class="btn ghost" href="{{ company.phone_href }}">Call Now</a>
+</div>
+</div>
+<form class="glass lead-card" method="post" action="{{ url_for('request_service') }}">
+<h3>Get help today</h3>
+<p>{% if lead_enabled %}Your request will be recorded.{% else %}Portfolio demo: requests are not sent or saved.{% endif %}</p>
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<input aria-label="Name" name="name" maxlength="100" placeholder="Name" required>
+<input aria-label="Phone" name="phone" maxlength="30" placeholder="Phone" required>
+<select aria-label="Service" name="service">
+<option>AC Repair</option>
+<option>Heating</option>
+<option>Refrigeration</option>
+<option>Maintenance</option>
+</select>
+<input type="hidden" name="source_page" value="home hero">
+<button>Send Request</button>
+</form>
+</section>
+
+<section class="section">
+<p class="eyebrow reveal">What we do</p>
+<h2 class="reveal">Explore heating, cooling, and refrigeration services.</h2>
+<div class="service-grid">
+{% for s in services %}
+<article class="service-card reveal">
+<img src="{{ s.image }}" alt="{{ s.title }}">
+<div>
+<span>{{ s.eyebrow }}</span>
+<h3>{{ s.title }}</h3>
+<p>{{ s.summary }}</p>
+</div>
+</article>
+{% endfor %}
+</div>
+</section>
+<section class="split reveal">
+<div>
+<p class="eyebrow">Contact options</p>
+<h2>No heat? No cooling? Make the next step obvious.</h2>
+<p>Clear contact options and service pages help visitors find the right next step.</p>
+<a class="btn primary" href="{{ company.phone_href }}">Call {{ company.phone }}</a>
+</div>
+<div class="glass checklist">
+<p>✓ Optional lead intake</p>
+<p>✓ Configurable webhook</p>
+<p>✓ Local service pages</p>
+<p>✓ Accessible navigation</p>
+<p>✓ Mobile-first layout</p>
+</div>
+</section>
+<section class="section">
+<p class="eyebrow reveal">Project gallery</p>
+<h2 class="reveal">Illustrative imagery for the portfolio concept.</h2>
+<div class="gallery">
+{% for p in projects %}
+<figure class="reveal">
+<img src="{{ p.image }}" alt="{{ p.title }}">
+<figcaption>{{ p.title }} · {{ p.location }}</figcaption>
+</figure>
+{% endfor %}
+</div>
+</section>
+
+<section class="map-section reveal">
+<div>
+<p class="eyebrow">Service area</p>
+<h2>Serving Harrisburg, Hershey, Mechanicsburg, Camp Hill, Carlisle, and nearby Central PA communities.</h2>
+</div>
+<iframe title="Google Map Harrisburg" loading="lazy" src="https://www.google.com/maps?q=Harrisburg%20PA&output=embed">
+</iframe>
+</section>
+<a class="float-call" href="{{ company.phone_href }}">Call Now</a>
+{% endblock %}

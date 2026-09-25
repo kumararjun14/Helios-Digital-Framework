@@ -1,0 +1,37 @@
+{% extends "base.html" %}{% block title %}Request HVAC Service | {{ company.name }}{% endblock %}{% block content %}
+<section class="form-page">
+<div>
+<p class="eyebrow">Request Service</p>
+<h1>Tell us what’s happening. We’ll help you take the next step.</h1>
+<p>For urgent HVAC issues, call directly at <a href="{{ company.phone_href }}">{{ company.phone }}</a>.</p>
+</div>
+<form class="glass big-form" method="post">
+<p>{% if lead_enabled %}Your request will be recorded using the configured destination.{% else %}Portfolio demo: submissions are not sent or saved.{% endif %}</p>
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label>Name<input name="name" maxlength="100" required>
+</label>
+<label>Phone<input name="phone" maxlength="30" required>
+</label>
+<label>Email<input name="email" type="email" maxlength="254">
+</label>
+<label>Service<select name="service">
+<option>AC Repair</option>
+<option>Heating Repair</option>
+<option>Refrigeration</option>
+<option>Maintenance</option>
+<option>Commercial HVAC</option>
+</select>
+</label>
+<label>Urgency<select name="urgency">
+<option>Normal</option>
+<option>Emergency</option>
+</select>
+</label>
+<label>Message<textarea name="message" rows="5" maxlength="2000" placeholder="What is going on?">
+</textarea>
+</label>
+<input type="hidden" name="source_page" value="request service page">
+<button>Submit Request</button>
+</form>
+</section>
+{% endblock %}
